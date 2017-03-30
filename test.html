@@ -1,11 +1,27 @@
 <html>
+<head>
+</head>
+<body>
+<div id="battery"></div>
+
 <script type="text/javascript">
-window.setInterval(function(){
 
-window.navigator.vibrate(100);
-},200);
+function testHardware(){
 
+	window.setInterval(function(){
+		var nav = window.navigator;
+		var battery = document.getElementById("battery");
+		nav.vibrate(10);
+		batter.innerHTML =  nav.battery;
+
+	},200);
+}
+
+window.addEventListener("load", testHardware);
 
 </script>
 
+
+
+</body>
 </html>
