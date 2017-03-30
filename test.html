@@ -3,16 +3,30 @@
 </head>
 <body>
 <div id="battery"></div>
+<div id="location"></div>
 
 <script type="text/javascript">
 
 function testHardware(){
 
+	var batteryDiv = document.getElementById("battery");
+	var locationDiv = document.getElementById("location");
+	//var battery = navigator.battery || navigator.webkitBattery || navigator.mozBattery;
+
 	window.setInterval(function(){
 		var nav = window.navigator;
-		var battery = document.getElementById("battery");
-		nav.vibrate(10);
-		batter.innerHTML =  nav.battery;
+		nav.vibrate(100);
+		if (navigator.getBattery) {
+    		navigator.getBattery().then(function(battery){
+				batteryDiv.innerHTML = "Battery Level: " + battery.level;
+				batteryDiv.innerHTML += "</br>Charging: " + battery.charging;
+				batteryDiv.innerHTML += "</br>Discharge Time: " + battery.dischargingTime;
+    		});
+		}
+		nav.geolocation.getCurrentPosition(function(position){
+			locationDiv.innerHTML =  'Latitude: ' + position.coords.latitude
+			locationDiv.innerHTML +=  'Longitude: ' + position.coords.longitude
+		});
 
 	},200);
 }
